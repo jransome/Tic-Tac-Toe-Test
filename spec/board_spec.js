@@ -3,13 +3,20 @@ describe("Board", function(){
 
   // Doubles
   function fieldClassDouble(){}
-
   var markerDouble = jasmine.createSpyObj('marker', ['isCross']);
-  markerDouble.isCross.and.callFake(function(){ return true; });
 
   // Empty board
-  var emptyRow = [new fieldClassDouble(), new fieldClassDouble(), new fieldClassDouble()];
-  var emptyBoard = [emptyRow, emptyRow, emptyRow];
+  var emptyBoard = function constructEmptyBoardDouble(fieldClass){
+    var board = [];
+    for (var i = 0; i < BOARD_HEIGHT; i++) {
+      var newRow = [];
+      for (var j = 0; j < BOARD_WIDTH; j++) {
+        newRow.push(new fieldClassDouble());
+      }
+      board.push(newRow);
+    }
+    return board;
+  }();
 
   var chosenRow = 1;
   var chosenColumn = 2;
@@ -24,7 +31,6 @@ describe("Board", function(){
 
   it("places a marker at a specified row and column", function(){
     board.placeMarker(markerDouble, chosenRow, chosenColumn);
-    console.log(board.board());
     expect(board.board()[chosenRow][chosenColumn]).toEqual(markerDouble);
   });
 
