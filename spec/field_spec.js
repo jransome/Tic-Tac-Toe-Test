@@ -18,5 +18,4 @@ describe("Field", function(){
     field.claim('X');
     expect(function(){ field.claim('O'); }).toThrow("Field is already claimed!");
   });
-
 });
