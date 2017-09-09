@@ -34,13 +34,15 @@ describe("Game", function(){
 
     it("places a cross marker when it is cross' turn", function(){
       game.playTurn(selectedRowForCross, selectedColumnForCross);
-      expect(boardDouble.placeMarker.calls.mostRecent().args).toEqual([crossMarkerDouble, selectedRowForCross, selectedColumnForCross]);
+      expect(boardDouble.placeMarker.calls.mostRecent().args)
+      .toEqual([crossMarkerDouble, selectedRowForCross, selectedColumnForCross]);
     });
 
     it("places a nought marker when it is nought's turn", function(){
       game.playTurn(selectedRowForCross, selectedColumnForCross);
       game.playTurn(selectedRowForNought, selectedColumnForNought);
-      expect(boardDouble.placeMarker.calls.mostRecent().args).toEqual([noughtMarkerDouble, selectedRowForNought, selectedColumnForNought]);
+      expect(boardDouble.placeMarker.calls.mostRecent().args)
+      .toEqual([noughtMarkerDouble, selectedRowForNought, selectedColumnForNought]);
     });
 
   });

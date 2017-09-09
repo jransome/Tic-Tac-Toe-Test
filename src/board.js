@@ -20,11 +20,11 @@
     },
 
     placeMarker: function(marker, row, column){
-      this._board[row][column] = marker;
+      this._board[row][column].claim(marker);
     },
 
     checkMarker: function(row, column){
-      return this._board[row][column];
+      return this._board[row][column].claimedBy();
     }
   };
 

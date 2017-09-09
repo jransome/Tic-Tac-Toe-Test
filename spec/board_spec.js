@@ -2,40 +2,34 @@ describe("Board", function(){
   var board;
 
   // Doubles
-  function fieldClassDouble(){}
+  var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
   var markerDouble = jasmine.createSpyObj('marker', ['isCross']);
 
   // Empty board
-  var emptyBoard = function constructEmptyBoardDouble(fieldClass){
-    var board = [];
-    for (var i = 0; i < BOARD_HEIGHT; i++) {
-      var newRow = [];
-      for (var j = 0; j < BOARD_WIDTH; j++) {
-        newRow.push(new fieldClassDouble());
-      }
-      board.push(newRow);
-    }
-    return board;
-  }();
+  function fieldClassDouble(){}
+  var emptyBoard = constructEmptyBoardDouble(fieldClassDouble);
 
   var chosenRow = 1;
   var chosenColumn = 2;
 
   beforeEach(function(){
-    board = new Board(fieldClassDouble);
+    spyOn(window, 'Field').and.returnValue(fieldDouble);
+    board = new Board();
   });
 
-  it("has no markers on it by default", function(){
+  it("contains a 2D array of fields", function(){
+    board = new Board(fieldClassDouble);
     expect(board.board()).toEqual(emptyBoard);
   });
 
   it("places a marker at a specified row and column", function(){
     board.placeMarker(markerDouble, chosenRow, chosenColumn);
-    expect(board.board()[chosenRow][chosenColumn]).toEqual(markerDouble);
+    var argsLog = board.board()[chosenRow][chosenColumn].claim.calls.mostRecent().args;
+    expect(argsLog).toEqual([markerDouble]);
   });
 
   it("checks for a marker at a specified row and column", function(){
-    board.board()[chosenRow][chosenColumn] = markerDouble;
-    expect(board.checkMarker(chosenRow, chosenColumn)).toEqual(markerDouble);
+    board.checkMarker(chosenRow,chosenColumn);
+    expect(board.board()[chosenRow][chosenColumn].claimedBy).toHaveBeenCalled();
   });
 });
