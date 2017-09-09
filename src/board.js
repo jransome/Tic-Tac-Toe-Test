@@ -20,13 +20,18 @@
     },
 
     placeMarker: function(marker, row, column){
-      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
+      checkFieldIsInBoardRange(row, column);
       this._board[row][column].claim(marker);
     },
 
+    // NOTE unused function???
     checkMarker: function(row, column){
-      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
+      checkFieldIsInBoardRange(row, column);
       return this._board[row][column].claimedBy();
+    },
+
+    checkFieldIsInBoardRange: function(row, column){
+      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
     }
   };
 
