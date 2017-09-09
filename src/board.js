@@ -6,9 +6,9 @@
   Board.prototype = {
     constructBoard: function(fieldClass){
       this._board = [];
-      for (var i = 0; i < BOARD_HEIGHT; i++) {
+      for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
         var newRow = [];
-        for (var j = 0; j < BOARD_WIDTH; j++) {
+        for (var j = 0; j < BOARD_HEIGHT_AND_WIDTH; j++) {
           newRow.push(new fieldClass());
         }
         this._board.push(newRow);
@@ -31,7 +31,9 @@
     },
 
     checkFieldIsInBoardRange: function(row, column){
-      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
+      if (row > BOARD_HEIGHT_AND_WIDTH || column > BOARD_HEIGHT_AND_WIDTH){
+        throw "That field does not exist!";
+      }
     }
   };
 
