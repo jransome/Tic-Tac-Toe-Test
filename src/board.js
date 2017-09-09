@@ -20,13 +20,13 @@
     },
 
     placeMarker: function(marker, row, column){
-      checkFieldIsInBoardRange(row, column);
+      this.checkFieldIsInBoardRange(row, column);
       this._board[row][column].claim(marker);
     },
 
     // NOTE unused function???
     checkMarker: function(row, column){
-      checkFieldIsInBoardRange(row, column);
+      this.checkFieldIsInBoardRange(row, column);
       return this._board[row][column].claimedBy();
     },
 
