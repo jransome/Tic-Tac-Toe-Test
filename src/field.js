@@ -1,5 +1,4 @@
 (function(exports){
-
   function Field(){
     this._claimedBy = null;
   }
@@ -17,6 +16,6 @@
       }
     }
   };
-
+  
   exports.Field = Field;
 })(this);

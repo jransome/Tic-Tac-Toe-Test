@@ -20,10 +20,12 @@
     },
 
     placeMarker: function(marker, row, column){
+      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
       this._board[row][column].claim(marker);
     },
 
     checkMarker: function(row, column){
+      if (row > BOARD_HEIGHT || column > BOARD_WIDTH) throw "That field does not exist!";
       return this._board[row][column].claimedBy();
     }
   };
