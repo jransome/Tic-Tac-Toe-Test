@@ -44,6 +44,5 @@ describe("Game", function(){
       expect(boardDouble.placeMarker.calls.mostRecent().args)
       .toEqual([noughtMarkerDouble, selectedRowForNought, selectedColumnForNought]);
     });
-
   });
 });
