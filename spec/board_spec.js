@@ -7,8 +7,7 @@ describe("Board", function(){
   fieldDouble.claimedBy.and.callFake(function(){ return markerDouble; });
 
   // Empty board
-  function fieldClassDouble(){}
-  var emptyBoard = constructEmptyBoardDouble(fieldClassDouble);
+  var emptyBoard = constructEmptyBoardDouble();
 
   var chosenRow = 1;
   var chosenColumn = 2;
@@ -26,7 +25,7 @@ describe("Board", function(){
   });
 
   it("contains a 2D array of fields", function(){
-    instantiateBoardSubject(fieldClassDouble);
+    instantiateBoardSubject(FieldClassDouble);
     expect(board.board()).toEqual(emptyBoard);
   });
 

@@ -5,31 +5,33 @@
   }
 
   GameStateChecker.prototype = {
-    updateGameState: function(isLastMarkerCross, lastMarkerRow, lastMarkerColumn){
-      this.checkForWin(isCross, lastMarkerRow, lastMarkerColumn);
+    updateGameState: function(isCross, lastMarkerRow, lastMarkerColumn){
       this.countTurn();
+      this.checkForWin(isCross, lastMarkerRow, lastMarkerColumn);
     },
 
     checkForWin: function(isCross, lastMarkerRow, lastMarkerColumn){
       var self = this;
-      var rowCounter;
-      var columnCounter;
-      var diagonalCounter;
-      var antiDiagonalCounter;
+      var rowCounter = 0;
+      var columnCounter = 0;
+      var diagonalCounter = 0;
+      var antiDiagonalCounter = 0;
       for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
-        if (self._board[lastMarkerRow][i].claimedBy().isCross() === isCross) { rowCounter += 1; }
-        if (self._board[i][lastMarkerColumn].claimedBy().isCross() === isCross) { columnCounter += 1; }
+        if (self._board.checkMarker(lastMarkerRow, i) === isCross) { rowCounter ++; }
+        if (self._board.checkMarker(i, lastMarkerColumn) === isCross) { columnCounter ++; }
+        // if (self._board.checkMarker(lastMarkerRow + i, lastMarkerColumn + i) === isCross) { diagonalCounter ++; }
       }
-      console.log(rowCounter)
-      console.log(columnCounter)
+
+      return (rowCounter === BOARD_HEIGHT_AND_WIDTH ||
+              columnCounter === BOARD_HEIGHT_AND_WIDTH);
     },
 
-    isDraw: function(){
-      return this._turnsTaken === MAX_NUMBER_OF_TURNS;
+    allFieldsClaimed: function(){
+      return this._turnsTaken >= MAX_NUMBER_OF_TURNS;
     },
 
     countTurn: function(){
-      this._turnsTaken += 1;
+      this._turnsTaken ++;
     }
   };
 

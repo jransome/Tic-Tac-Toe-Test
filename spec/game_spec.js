@@ -9,13 +9,12 @@ describe("Game", function(){
   var gameStateCheckerDouble = jasmine.createSpyObj('gameStateChecker', ['updateGameState']);
   function MarkerClassDouble(isCross) {
     this._isCross = isCross;
-
-    MarkerClassDouble.prototype = {
-      isCross: function(){
-        return this._isCross;
-      }
-    };
   }
+  MarkerClassDouble.prototype = {
+    isCross: function(){
+      return this._isCross;
+    }
+  };
   var crossMarkerDouble = new MarkerClassDouble(true);
   var noughtMarkerDouble = new MarkerClassDouble(false);
 
