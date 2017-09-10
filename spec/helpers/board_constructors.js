@@ -1,5 +1,3 @@
-function FieldClassDouble(){}
-
 function constructEmptyBoardDouble(){
   var board = [];
   for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
@@ -13,14 +11,12 @@ function constructEmptyBoardDouble(){
 }
 
 function constructRowWinTestBoard(){
-  var XMarkerField = new Field();
-  XMarkerField.claim(new Marker(true));
-  var OMarkerField = new Field();
-  OMarkerField.claim(new Marker(false));
-  var EmptyField = new Field();
+  var x = fieldDoubleWithX;
+  var o = fieldDoubleWithO;
+  var empty = fieldDouble;
   var board = new Board();
-  board._board = [[XMarkerField, XMarkerField, XMarkerField],
-                 [OMarkerField, XMarkerField, OMarkerField],
-                 [EmptyField, XMarkerField, EmptyField]];
+  board._board = [[x, x, x],
+                 [o, x, o],
+                 [empty, x, empty]];
   return board;
 }
