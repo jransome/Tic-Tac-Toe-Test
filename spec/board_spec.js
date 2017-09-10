@@ -2,8 +2,9 @@ describe("Board", function(){
   var board;
 
   // Doubles
-  var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
   var markerDouble = jasmine.createSpyObj('marker', ['isCross']);
+  var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
+  fieldDouble.claimedBy.and.callFake(function(){ return markerDouble; });
 
   // Empty board
   function fieldClassDouble(){}
@@ -42,15 +43,22 @@ describe("Board", function(){
     });
   });
 
-  describe("#checkMarker", function(){
-    it("checks for a marker at a specified row and column", function(){
-      board.checkMarker(chosenRow,chosenColumn);
+  describe("#getMarker", function(){
+    it("gets the marker at a specified row and column", function(){
+      board.getMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy).toHaveBeenCalled();
     });
 
     it("raises an error if checking for a field outside the board's range", function(){
       expect(function(){ board.checkMarker(invalidRow, invalidColumn); })
       .toThrow(outOfBoardRangeError);
+    });
+  });
+
+  describe("#checkMarker", function (){
+    it("checks whether the marker at a specified row and column is a cross", function(){
+      board.checkMarker(chosenRow,chosenColumn);
+      expect(board.board()[chosenRow][chosenColumn].claimedBy().isCross).toHaveBeenCalled();
     });
   });
 });

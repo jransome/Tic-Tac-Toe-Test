@@ -24,10 +24,14 @@
       this._board[row][column].claim(marker);
     },
 
-    // NOTE unused function???
-    checkMarker: function(row, column){
+    getMarker: function(row, column){
       this.checkFieldIsInBoardRange(row, column);
       return this._board[row][column].claimedBy();
+    },
+
+    checkMarker: function(row, column){
+      var marker = this.getMarker(row, column);
+      return marker !== null ? marker.isCross() : null;
     },
 
     checkFieldIsInBoardRange: function(row, column){
