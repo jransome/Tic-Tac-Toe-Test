@@ -10,12 +10,12 @@ describe("Field", function(){
     expect(field.claimedBy()).toEqual(null);
   });
 
-  it("can be claimed by a player", function(){
+  it("can be claimed by a marker", function(){
     field.claim(markerDouble);
     expect(field.claimedBy()).toEqual(markerDouble);
   });
 
-  it("throws an error a player attempts to claim an already claimed field", function(){
+  it("throws an error if claimed when already claimed", function(){
     field.claim(markerDouble);
     expect(function(){ field.claim(markerDouble); }).toThrow("Field is already claimed!");
   });

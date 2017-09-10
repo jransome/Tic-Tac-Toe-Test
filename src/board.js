@@ -25,8 +25,13 @@
     },
 
     getMarker: function(row, column){
-      this.checkFieldIsInBoardRange(row, column);
-      return this._board[row][column].claimedBy();
+      try {
+        this.checkFieldIsInBoardRange(row, column);
+        return this._board[row][column].claimedBy();
+
+      } catch (e) {
+       return null;
+      }
     },
 
     checkMarker: function(row, column){
@@ -35,7 +40,7 @@
     },
 
     checkFieldIsInBoardRange: function(row, column){
-      if (row > BOARD_HEIGHT_AND_WIDTH || column > BOARD_HEIGHT_AND_WIDTH){
+      if (row >= BOARD_HEIGHT_AND_WIDTH || column >= BOARD_HEIGHT_AND_WIDTH){
         throw "That field does not exist!";
       }
     }

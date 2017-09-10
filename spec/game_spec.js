@@ -6,20 +6,21 @@ describe("Game", function(){
   var selectedColumnForNought = 1;
 
   var boardDouble = jasmine.createSpyObj('board', ['placeMarker']);
-  function markerClassDouble(isCross) {
+  var gameStateCheckerDouble = jasmine.createSpyObj('gameStateChecker', ['updateGameState']);
+  function MarkerClassDouble(isCross) {
     this._isCross = isCross;
 
-    Marker.prototype = {
+    MarkerClassDouble.prototype = {
       isCross: function(){
         return this._isCross;
       }
     };
   }
-  var crossMarkerDouble = new markerClassDouble(true);
-  var noughtMarkerDouble = new markerClassDouble(false);
+  var crossMarkerDouble = new MarkerClassDouble(true);
+  var noughtMarkerDouble = new MarkerClassDouble(false);
 
   beforeEach(function(){
-    game = new Game(boardDouble, markerClassDouble);
+    game = new Game(boardDouble, MarkerClassDouble, gameStateCheckerDouble);
   });
 
   it("begins on cross' turn", function(){

@@ -48,11 +48,6 @@ describe("Board", function(){
       board.getMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy).toHaveBeenCalled();
     });
-
-    it("raises an error if checking for a field outside the board's range", function(){
-      expect(function(){ board.checkMarker(invalidRow, invalidColumn); })
-      .toThrow(outOfBoardRangeError);
-    });
   });
 
   describe("#checkMarker", function (){
