@@ -16,7 +16,18 @@ function constructRowWinTestBoard(){
   var empty = fieldDouble;
   var board = new Board();
   board._board = [[x, x, x],
-                 [o, x, o],
-                 [empty, x, empty]];
+                  [o, x, o],
+                  [empty, empty, empty]];
+  return board;
+}
+
+function constructColWinTestBoard(){
+  var x = fieldDoubleWithX;
+  var o = fieldDoubleWithO;
+  var empty = fieldDouble;
+  var board = new Board();
+  board._board = [[o, o, empty],
+                  [o, x, empty],
+                  [o, o, empty]];
   return board;
 }

@@ -10,22 +10,36 @@ describe("GameStateChecker", function(){
   });
 
   describe("#checkForWin", function(){
-    it("returns true if the last move wins by making a row", function(){
-      gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
-      expect(gameStateChecker.checkForWin(lastMarkerIsCross,
-                                          topRow,
-                                          rightCol)).toEqual(true);
+    describe("returns true if the last move wins by:", function(){
+      it("making a row", function(){
+        gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsCross,
+                                            topRow,
+                                            rightCol)).toEqual(true);
+      });
+
+      it("making a column", function(){
+        gameStateChecker = new GameStateChecker(constructColWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                            topRow,
+                                            leftCol)).toEqual(true);
+      });
     });
 
-    it("returns false if the last move doesn't win by making a row", function(){
-      gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
-      expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
-                                          midRow,
-                                          rightCol)).toEqual(false);
-    });
+    describe("returns false if the last move fails to:", function(){
+      it("make a row", function(){
+        gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                            midRow,
+                                            rightCol)).toEqual(false);
+      });
 
-    it("returns false if there is no winner after the turn ends", function(){
-
+      it("make a column", function(){
+        gameStateChecker = new GameStateChecker(constructColWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                            topRow,
+                                            midCol)).toEqual(false);
+      });
     });
   });
 
