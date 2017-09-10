@@ -1,8 +1,8 @@
 describe("GameStateChecker", function(){
   var gameStateChecker;
-  var lastMarkerIsCross = true;
-  var topRow = 0;
-  var rightColumn = 2;
+  var [lastMarkerIsCross, lastMarkerIsNotCross] = [true, false];
+  var [topRow, midRow, bottomRow] = [0, 1, 2];
+  var [leftCol, midCol, rightCol] = [0, 1, 2];
 
   beforeEach(function(){
     var emptyBoard = constructEmptyBoardDouble();
@@ -14,14 +14,14 @@ describe("GameStateChecker", function(){
       gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
       expect(gameStateChecker.checkForWin(lastMarkerIsCross,
                                           topRow,
-                                          rightColumn)).toEqual(true);
+                                          rightCol)).toEqual(true);
     });
 
     it("returns false if the last move doesn't win by making a row", function(){
       gameStateChecker = new GameStateChecker(constructRowWinTestBoard());
-      expect(gameStateChecker.checkForWin(false,
-                                          1,
-                                          2)).toEqual(false);
+      expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                          midRow,
+                                          rightCol)).toEqual(false);
     });
 
     it("returns false if there is no winner after the turn ends", function(){
