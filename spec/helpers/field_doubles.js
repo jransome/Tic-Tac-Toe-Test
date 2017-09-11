@@ -1,7 +1,7 @@
 function FieldClassDouble(){}
 
 var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
-fieldDouble.claimedBy.and.callFake(function(){ return null; });
+fieldDouble.claimedBy.and.callFake(function(){ return markerDouble; });
 
 var fieldDoubleWithX = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
 fieldDoubleWithX.claimedBy.and.callFake(function(){ return xMarkerDouble; });

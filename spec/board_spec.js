@@ -1,11 +1,6 @@
 describe("Board", function(){
   var board;
 
-  // Doubles
-  var markerDouble = jasmine.createSpyObj('marker', ['isCross']);
-  var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
-  fieldDouble.claimedBy.and.callFake(function(){ return markerDouble; });
-
   // Empty board
   var emptyBoard = constructEmptyBoardDouble();
 
@@ -56,7 +51,7 @@ describe("Board", function(){
       board.checkMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy().isCross).toHaveBeenCalled();
     });
-    
+
     sharedNullReturnTest();
   });
 
