@@ -19,11 +19,14 @@
       for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
         if (self._board.checkMarker(lastMarkerRow, i) === isCross) { rowCounter ++; }
         if (self._board.checkMarker(i, lastMarkerColumn) === isCross) { columnCounter ++; }
-        // if (self._board.checkMarker(lastMarkerRow + i, lastMarkerColumn + i) === isCross) { diagonalCounter ++; }
+        if (self._board.checkMarker(i, i) === isCross) { diagonalCounter ++; }
+        if (self._board.checkMarker(i, (BOARD_HEIGHT_AND_WIDTH - 1) - i) === isCross) { antiDiagonalCounter ++; }
       }
 
       return (rowCounter === BOARD_HEIGHT_AND_WIDTH ||
-              columnCounter === BOARD_HEIGHT_AND_WIDTH);
+              columnCounter === BOARD_HEIGHT_AND_WIDTH ||
+              diagonalCounter === BOARD_HEIGHT_AND_WIDTH ||
+              antiDiagonalCounter === BOARD_HEIGHT_AND_WIDTH);
     },
 
     allFieldsClaimed: function(){

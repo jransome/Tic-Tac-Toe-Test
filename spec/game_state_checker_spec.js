@@ -24,6 +24,20 @@ describe("GameStateChecker", function(){
                                             topRow,
                                             leftCol)).toEqual(true);
       });
+
+      it("making the diagonal", function(){
+        gameStateChecker = new GameStateChecker(constructDiagonalWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsCross,
+                                            midRow,
+                                            midCol)).toEqual(true);
+      });
+
+      it("making the anti-diagonal", function(){
+        gameStateChecker = new GameStateChecker(constructAntiDiagonalWinTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                            midRow,
+                                            midCol)).toEqual(true);
+      });
     });
 
     describe("returns false if the last move fails to:", function(){
@@ -40,11 +54,25 @@ describe("GameStateChecker", function(){
                                             topRow,
                                             midCol)).toEqual(false);
       });
+
+      it("make the diagonal", function(){
+        gameStateChecker = new GameStateChecker(constructDiagonalLoseTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsCross,
+                                            midRow,
+                                            midCol)).toEqual(false);
+      });
+
+      it("make the anti-diagonal", function(){
+        gameStateChecker = new GameStateChecker(constructAntiDiagonalLoseTestBoard());
+        expect(gameStateChecker.checkForWin(lastMarkerIsNotCross,
+                                            midRow,
+                                            midCol)).toEqual(false);
+      });
     });
   });
 
   describe("#allFieldsClaimed", function(){
-    it("returns true if the number of turns taken equals the number of fields", function(){
+    it("returns true if the number of turns taken is greater or equal to the number of fields", function(){
       for (var i = 0; i < MAX_NUMBER_OF_TURNS; i++) { gameStateChecker.countTurn(); }
       expect(gameStateChecker.allFieldsClaimed()).toEqual(true);
     });

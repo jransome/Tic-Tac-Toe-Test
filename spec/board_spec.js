@@ -1,9 +1,6 @@
 describe("Board", function(){
   var board;
-
-  // Empty board
-  var emptyBoard = constructEmptyBoardDouble();
-
+  var emptyBoardArray = constructEmptyBoardDouble();
   var chosenRow = 1;
   var chosenColumn = 2;
   var invalidRow = 8;
@@ -21,7 +18,7 @@ describe("Board", function(){
 
   it("contains a 2D array of fields", function(){
     instantiateBoardSubject(FieldClassDouble);
-    expect(board.board()).toEqual(emptyBoard);
+    expect(board.board()).toEqual(emptyBoardArray);
   });
 
   describe("#placeMarker", function(){

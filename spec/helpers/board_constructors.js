@@ -37,3 +37,27 @@ function constructDiagonalWinTestBoard(){
                   [o, o, x]];
   return board;
 }
+
+function constructDiagonalLoseTestBoard(){
+  var board = new Board();
+  board._board = [[x, o, empty],
+                  [o, x, empty],
+                  [o, x, o]];
+  return board;
+}
+
+function constructAntiDiagonalWinTestBoard(){
+  var board = new Board();
+  board._board = [[x, o, o],
+                  [o, o, empty],
+                  [o, x, x]];
+  return board;
+}
+
+function constructAntiDiagonalLoseTestBoard(){
+  var board = new Board();
+  board._board = [[x, o, x],
+                  [o, o, empty],
+                  [o, x, x]];
+  return board;
+}
