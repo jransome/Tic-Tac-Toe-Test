@@ -47,6 +47,8 @@ describe("Board", function(){
       board.getMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy).toHaveBeenCalled();
     });
+
+    sharedNullReturnTest();
   });
 
   describe("#checkMarker", function (){
@@ -54,5 +56,13 @@ describe("Board", function(){
       board.checkMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy().isCross).toHaveBeenCalled();
     });
+    
+    sharedNullReturnTest();
   });
+
+  function sharedNullReturnTest(){
+    it("returns null when specified position is out of board's range", function(){
+      expect(board.getMarker(invalidRow,invalidColumn)).toEqual(null);
+    });
+  }
 });

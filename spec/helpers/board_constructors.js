@@ -1,3 +1,7 @@
+var x = fieldDoubleWithX;
+var o = fieldDoubleWithO;
+var empty = fieldDouble;
+
 function constructEmptyBoardDouble(){
   var board = [];
   for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
@@ -11,9 +15,6 @@ function constructEmptyBoardDouble(){
 }
 
 function constructRowWinTestBoard(){
-  var x = fieldDoubleWithX;
-  var o = fieldDoubleWithO;
-  var empty = fieldDouble;
   var board = new Board();
   board._board = [[x, x, x],
                   [o, x, o],
@@ -22,12 +23,17 @@ function constructRowWinTestBoard(){
 }
 
 function constructColWinTestBoard(){
-  var x = fieldDoubleWithX;
-  var o = fieldDoubleWithO;
-  var empty = fieldDouble;
   var board = new Board();
   board._board = [[o, o, empty],
                   [o, x, empty],
                   [o, o, empty]];
+  return board;
+}
+
+function constructDiagonalWinTestBoard(){
+  var board = new Board();
+  board._board = [[x, o, empty],
+                  [o, x, empty],
+                  [o, o, x]];
   return board;
 }
