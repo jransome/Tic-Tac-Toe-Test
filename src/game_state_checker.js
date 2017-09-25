@@ -5,11 +5,6 @@
   }
 
   GameStateChecker.prototype = {
-    updateGameState: function(isCross, lastMarkerRow, lastMarkerColumn){
-      this.countTurn();
-      this.checkForWin(isCross, lastMarkerRow, lastMarkerColumn);
-    },
-
     checkForWin: function(isCross, lastMarkerRow, lastMarkerColumn){
       var self = this;
       var rowCounter = 0;
@@ -17,16 +12,20 @@
       var diagonalCounter = 0;
       var antiDiagonalCounter = 0;
       for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
-        if (self._board.checkMarker(lastMarkerRow, i) === isCross) { rowCounter ++; }
-        if (self._board.checkMarker(i, lastMarkerColumn) === isCross) { columnCounter ++; }
-        if (self._board.checkMarker(i, i) === isCross) { diagonalCounter ++; }
-        if (self._board.checkMarker(i, (BOARD_HEIGHT_AND_WIDTH - 1) - i) === isCross) { antiDiagonalCounter ++; }
+        if (this.checkMarkerTeam(isCross, lastMarkerRow, i)) { rowCounter ++; }
+        if (this.checkMarkerTeam(isCross, i, lastMarkerColumn)) { columnCounter ++; }
+        if (this.checkMarkerTeam(isCross, i, i)) { diagonalCounter ++; }
+        if (this.checkMarkerTeam(isCross, i, (BOARD_HEIGHT_AND_WIDTH - 1) - i)) { antiDiagonalCounter ++; }
       }
 
       return (rowCounter === BOARD_HEIGHT_AND_WIDTH ||
               columnCounter === BOARD_HEIGHT_AND_WIDTH ||
               diagonalCounter === BOARD_HEIGHT_AND_WIDTH ||
               antiDiagonalCounter === BOARD_HEIGHT_AND_WIDTH);
+    },
+
+    checkMarkerTeam: function(isCross, row, col){
+      return this._board.checkMarker(row, col) === isCross;
     },
 
     allFieldsClaimed: function(){
