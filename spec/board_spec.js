@@ -1,14 +1,6 @@
 describe("Board", function(){
   var board;
-
-  // Doubles
-  var fieldDouble = jasmine.createSpyObj('field', ['claim', 'claimedBy']);
-  var markerDouble = jasmine.createSpyObj('marker', ['isCross']);
-
-  // Empty board
-  function fieldClassDouble(){}
-  var emptyBoard = constructEmptyBoardDouble(fieldClassDouble);
-
+  var emptyBoardArray = constructEmptyBoardDouble();
   var chosenRow = 1;
   var chosenColumn = 2;
   var invalidRow = 8;
@@ -25,8 +17,8 @@ describe("Board", function(){
   });
 
   it("contains a 2D array of fields", function(){
-    instantiateBoardSubject(fieldClassDouble);
-    expect(board.board()).toEqual(emptyBoard);
+    instantiateBoardSubject(FieldClassDouble);
+    expect(board.board()).toEqual(emptyBoardArray);
   });
 
   describe("#placeMarker", function(){
@@ -42,15 +34,27 @@ describe("Board", function(){
     });
   });
 
-  describe("#checkMarker", function(){
-    it("checks for a marker at a specified row and column", function(){
-      board.checkMarker(chosenRow,chosenColumn);
+  describe("#getMarker", function(){
+    it("gets the marker at a specified row and column", function(){
+      board.getMarker(chosenRow,chosenColumn);
       expect(board.board()[chosenRow][chosenColumn].claimedBy).toHaveBeenCalled();
     });
 
-    it("raises an error if checking for a field outside the board's range", function(){
-      expect(function(){ board.checkMarker(invalidRow, invalidColumn); })
-      .toThrow(outOfBoardRangeError);
-    });
+    sharedNullReturnTest();
   });
+
+  describe("#checkMarker", function (){
+    it("checks whether the marker at a specified row and column is a cross", function(){
+      board.checkMarker(chosenRow,chosenColumn);
+      expect(board.board()[chosenRow][chosenColumn].claimedBy().isCross).toHaveBeenCalled();
+    });
+
+    sharedNullReturnTest();
+  });
+
+  function sharedNullReturnTest(){
+    it("returns null when specified position is out of board's range", function(){
+      expect(board.getMarker(invalidRow,invalidColumn)).toEqual(null);
+    });
+  }
 });
