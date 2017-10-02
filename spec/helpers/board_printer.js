@@ -1,4 +1,4 @@
-function boardDebugger(board){
+function boardPrinter(board){
   var output = [];
   for (var i = 0; i < BOARD_HEIGHT_AND_WIDTH; i++) {
     var newRow = [];

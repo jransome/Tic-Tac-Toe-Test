@@ -73,6 +73,7 @@ To interact with the program open Index.html in Chrome and open the console from
 * Create a new game instance with `var game = new Game()`.
 * Play a turn (cross is first by default) with `game.playTurn(row, column)`, where row and column are zero indexed and (0, 0) is the top-left of the board.
 * Executing `playTurn()` alternates between cross' and nought's turn, hence running it again will play nought's turn.
+* If you try to place a marker where one already exists an exception will be thrown.
 * If a game is over (by win or draw), `playTurn()` will throw an exception.
 
 ## Dependencies
