@@ -1,4 +1,4 @@
-# Tic-Tac-Toe-Test
+# Tic-Tac-Toe
 
 ## Approach
 
